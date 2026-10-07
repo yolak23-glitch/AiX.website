@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0f0f12">
+<title>AiX - APK Showcase Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0f0f12;--bg2:#16161a;--pu:#7c3aed;--bl:#3b82f6;--tx:#ececf3;--mut:#9494a8;--bd:rgba(255,255,255,.09);--glass:rgba(255,255,255,.04);--grad:linear-gradient(135deg,#7c3aed,#3b82f6)}
+html{scroll-behavior:smooth}
+body{font:400 15px/1.55 Inter,system-ui,sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(600px 420px at 88% -4%,rgba(124,58,237,.28),transparent),radial-gradient(520px 420px at -6% 42%,rgba(59,130,246,.17),transparent),var(--bg)}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+:focus-visible{outline:2px solid var(--bl);outline-offset:2px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+
+/* Header */
+header{position:sticky;top:0;z-index:50;background:rgba(15,15,18,.72);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--bd)}
+.bar{display:flex;align-items:center;justify-content:space-between;height:62px}
+.logo{display:flex;align-items:center;gap:10px;font:700 25px Poppins,sans-serif;letter-spacing:-.5px;text-shadow:0 0 18px rgba(124,58,237,.95)}
+.logo i{width:34px;height:34px;display:grid;place-items:center;border-radius:11px;background:var(--grad);font-size:15px;text-shadow:none;box-shadow:0 0 22px rgba(124,58,237,.75)}
+.logo b{color:var(--bl);text-shadow:0 0 18px rgba(59,130,246,.95)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 18px;border-radius:12px;font:600 14px Poppins,sans-serif;transition:.2s;white-space:nowrap}
+.btn-neon{background:var(--grad);color:#fff}
+.btn-neon:hover{box-shadow:0 0 24px rgba(124,58,237,.7);transform:translateY(-1px)}
+.btn-ghost{border:1px solid var(--bd);background:var(--glass)}
+.btn-ghost:hover{border-color:var(--pu)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.sm{padding:9px 14px;font-size:13px;flex:1}
+.big{width:100%;padding:14px;font-size:15px;margin-top:18px}
+
+/* Hero slider */
+.hero{position:relative;height:360px;margin:20px 0 0;border-radius:24px;overflow:hidden;border:1px solid var(--bd);box-shadow:0 0 44px rgba(124,58,237,.2)}
+.slide{position:absolute;inset:0;display:flex;align-items:flex-end;padding:24px;opacity:0;visibility:hidden;transition:opacity .6s,visibility .6s;background-size:cover;background-position:center}
+.slide.on{opacity:1;visibility:visible}
+.slide:before{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(15,15,18,.96) 10%,rgba(15,15,18,.4) 68%,rgba(15,15,18,.1))}
+.slide>div{position:relative;max-width:580px}
+.tag{display:inline-flex;align-items:center;gap:7px;padding:5px 12px;border-radius:99px;font:600 12px Inter;background:rgba(124,58,237,.25);border:1px solid rgba(124,58,237,.6);backdrop-filter:blur(8px);margin-bottom:12px}
+.slide h2{font:700 clamp(26px,6vw,44px)/1.12 Poppins,sans-serif;letter-spacing:-.8px;text-shadow:0 0 30px rgba(124,58,237,.5)}
+.slide p{color:#c4c4d4;margin:10px 0 18px;max-width:46ch}
+.ctl{position:absolute;top:16px;right:16px;z-index:5;display:flex;align-items:center;gap:6px;padding:6px;border-radius:99px;background:rgba(15,15,18,.55);backdrop-filter:blur(10px);border:1px solid var(--bd)}
+.ctl button{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:12px;color:var(--mut)}
+.ctl button:hover{color:#fff;background:var(--glass)}
+.dot{width:7px!important;height:7px!important;padding:0;background:rgba(255,255,255,.3)!important;transition:.25s}
+.dot.on{width:22px!important;border-radius:99px!important;background:var(--grad)!important}
+
+/* Search & filters */
+.tools{display:flex;flex-direction:column;gap:14px;margin:26px 0 18px}
+.search{position:relative}
+.search>i{position:absolute;left:17px;top:50%;transform:translateY(-50%);color:var(--mut);pointer-events:none}
+.search input{width:100%;padding:15px 46px 15px 46px;border-radius:16px;border:1px solid var(--bd);background:var(--glass);backdrop-filter:blur(12px);color:var(--tx);font:inherit;outline:0;transition:.2s}
+.search input:focus{border-color:var(--pu);box-shadow:0 0 0 4px rgba(124,58,237,.18),0 0 26px rgba(124,58,237,.28)}
+.clr{position:absolute;right:9px;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:50%;color:var(--mut);display:none}
+.clr.on{display:block}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 6px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.cf{flex:none;padding:9px 18px;border-radius:99px;border:1px solid var(--bd);background:var(--glass);color:var(--mut);font:500 14px Inter;transition:.2s}
+.cf:hover{color:var(--tx);border-color:var(--pu)}
+.cf.on{background:var(--grad);color:#fff;border-color:transparent;box-shadow:0 0 20px rgba(124,58,237,.55)}
+.head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:14px}
+.head h3{font:600 20px Poppins,sans-serif}
+.head span{color:var(--mut);font-size:13px}
+
+/* Cards */
+.grid{display:grid;gap:14px;grid-template-columns:1fr}
+@media(min-width:640px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1000px){.grid{grid-template-columns:repeat(3,1fr)}.hero{height:440px}.slide{padding:44px}}
+.card{display:flex;flex-direction:column;gap:12px;padding:18px;border-radius:20px;border:1px solid var(--bd);background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02));backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);cursor:pointer;transition:.25s;animation:in .45s both}
+.card:hover{transform:translateY(-4px);border-color:rgba(124,58,237,.65);box-shadow:0 14px 42px rgba(124,58,237,.24)}
+@keyframes in{from{opacity:0;transform:translateY(12px)}}
+.top{display:flex;align-items:center;gap:14px}
+.top h4{font:600 17px/1.25 Poppins,sans-serif}
+.sub{color:var(--mut);font-size:13px}
+.ico{position:relative;flex:none;width:58px;height:58px;border-radius:17px;overflow:hidden;display:grid;place-items:center;font:700 20px Poppins,sans-serif;color:#fff;background:linear-gradient(135deg,hsl(var(--h) 80% 56%),hsl(calc(var(--h) + 50) 80% 42%));box-shadow:0 0 20px hsl(var(--h) 80% 50%/.4)}
+.ico img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.vt{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.ver,.bdg{font:600 11px Poppins,sans-serif;padding:3px 9px;border-radius:8px}
+.ver{background:rgba(59,130,246,.15);color:#8db8ff;border:1px solid rgba(59,130,246,.4)}
+.bdg{background:rgba(124,58,237,.2);color:#c4a8ff;border:1px solid rgba(124,58,237,.5)}
+.desc{color:#b4b4c6;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;flex:1}
+.rate{display:inline-flex;align-items:center;gap:6px;font-weight:600}
+.rate i{color:#fbbf24}
+.rs{display:flex;justify-content:space-between;color:var(--mut);font-size:13px}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tags span{font:600 10.5px Inter;letter-spacing:.4px;padding:4px 9px;border-radius:7px;color:#a5b4fc;background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.3)}
+.acts{display:flex;gap:8px}
+
+/* Empty state */
+.empty{display:none;text-align:center;padding:48px 20px;border-radius:20px;border:1px dashed rgba(124,58,237,.5);background:var(--glass)}
+.empty.on{display:block}
+.empty i{font-size:38px;color:var(--pu);filter:drop-shadow(0 0 14px rgba(124,58,237,.8));margin-bottom:14px}
+.empty h4{font:600 18px Poppins,sans-serif}
+.empty p{color:var(--mut);margin:6px 0 18px}
+
+/* Modal */
+.ov{position:fixed;inset:0;z-index:100;display:none;align-items:flex-end;justify-content:center;background:rgba(5,5,8,.72);backdrop-filter:blur(6px)}
+.ov.on{display:flex}
+.modal{position:relative;width:100%;max-width:560px;max-height:90vh;overflow:auto;padding:24px 20px;border-radius:24px 24px 0 0;background:var(--bg2);border:1px solid var(--bd);box-shadow:0 0 70px rgba(124,58,237,.35);animation:up .3s}
+@keyframes up{from{transform:translateY(40px);opacity:0}}
+@media(min-width:640px){.ov{align-items:center}.modal{border-radius:24px;padding:28px}}
+.x{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;background:var(--glass);border:1px solid var(--bd);color:var(--mut)}
+.x:hover{color:#fff}
+.mh{display:flex;gap:16px;align-items:center;margin-bottom:18px;padding-right:36px}
+.mh h3{font:700 22px Poppins,sans-serif}
+.mh .vt{margin-top:6px}
+.det{color:#c4c4d4;margin-bottom:18px}
+.meta{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
+.meta div{padding:12px 8px;text-align:center;border-radius:14px;background:var(--glass);border:1px solid var(--bd)}
+.meta b{display:block;font:600 14px Poppins,sans-serif}
+.meta span{font-size:12px;color:var(--mut)}
+
+/* Footer */
+footer{margin-top:56px;padding:30px 0 36px;border-top:1px solid var(--bd);background:rgba(22,22,26,.6)}
+.ft{display:flex;flex-direction:column;gap:18px;align-items:center;text-align:center}
+.ok{display:inline-flex;align-items:center;gap:9px;padding:8px 16px;border-radius:99px;font:600 13px Poppins,sans-serif;color:#4ade80;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.4);box-shadow:0 0 20px rgba(34,197,94,.15)}
+.fl{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.fl a{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:10px;color:var(--mut);border:1px solid var(--bd);transition:.2s}
+.fl a:hover{color:#fff;border-color:var(--pu);box-shadow:0 0 16px rgba(124,58,237,.35)}
+.cp{color:var(--mut);font-size:13px}
+@media(min-width:760px){.ft{flex-direction:row;justify-content:space-between;text-align:left}}
+@media(max-width:480px){.hs{display:none}.btn.dc{padding:10px 14px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="#" aria-label="AiX ana sayfa"><i class="fa-solid fa-bolt"></i><span>Ai<b>X</b></span></a>
+    <a class="btn btn-neon dc" id="dcBtn" target="_blank" rel="noopener"><i class="fa-brands fa-discord"></i><span class="hs">Discord'a Katıl</span></a>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero" id="hero" aria-label="Öne çıkanlar"></section>
+
+  <div class="tools">
+    <div class="search">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input id="q" type="search" placeholder="Uygulama, oyun veya etiket ara..." autocomplete="off" aria-label="Uygulama ara">
+      <button class="clr" id="clr" aria-label="Aramayı temizle"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="chips" id="chips" role="tablist"></div>
+  </div>
+
+  <div class="head"><h3>Uygulamalar</h3><span id="count"></span></div>
+  <div class="grid" id="grid"></div>
+  <div class="empty" id="empty">
+    <i class="fa-regular fa-face-frown-open"></i>
+    <h4>Aradığınız uygulama bulunamadı</h4>
+    <p id="eq"></p>
+    <button class="btn btn-neon" id="reset"><i class="fa-solid fa-rotate-left"></i>Filtreleri sıfırla</button>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap ft">
+    <div>
+      <div class="ok"><i class="fa-solid fa-shield-halved"></i>Güvenli ve Doğrulanmış APK</div>
+      <p class="cp" style="margin-top:12px">© 2026 AiX. Tüm hakları saklıdır.</p>
+    </div>
+    <nav class="fl" id="links" aria-label="İletişim"></nav>
+  </div>
+</footer>
+
+<div class="ov" id="ov"><div class="modal" id="modal" role="dialog" aria-modal="true"></div></div>
+
+<script>
+/* ==========================================================
+   YÖNETİM ALANI - Sadece bu bölümü düzenlemeniz yeterli
+   ========================================================== */
+
+const siteConfig = {
+  discord: "https://discord.gg/EG3pBeEz9D",
+  links: [
+    { label: "Discord", icon: "fa-brands fa-discord", url: "https://discord.gg/EG3pBeEz9D" }
+  ]
+};
+
+
+const slidesData = [
+  { tag: "Öne Çıkan", icon: "fa-star", title: "AIX Secure Chat v1.2 yayında", text: "Uçtan uca güvenli mesajlaşma, yeni koyu tema ve daha hızlı bağlantı.", image: "https://i.hizliresim.com/0oxbkqyk.png", button: "Hemen İndir", appId: "aix-secure-chat" },
+  { tag: "Duyuru", icon: "fa-bullhorn", title: "Topluluğa katıl, yeni sürümleri ilk sen al", text: "Beta testleri ve duyurular Discord sunucumuzda.", image: "", button: "Discord'a Katıl", link: siteConfig.discord }
+];
+
+const appsData = [
+  { id: "aix-secure-chat", name: "AIX Secure Chat", version: "v1.2", badge: "YENİ", category: "Sohbet", icon: "https://i.hizliresim.com/0oxbkqyk.png",
+    description: "Uçtan uca şifreli, hızlı ve sade mesajlaşma uygulaması.",
+    details: "Mesajlarınız cihazınızda şifrelenir. Grup sohbetleri, medya paylaşımı ve koyu tema destekler. Supabase altyapısıyla anlık senkronizasyon sağlar.",
+    rating: 4.9, size: "877.33 KB", updated: "2026-10-05", tags: ["GÜVENLİ", "HIZLI", "SUPABASE"], download: "https://www.mediafire.com/file/xqhzq66nbfvfkya/base.apk/file" }
+];
+
+/* ==========================================================
+   UYGULAMA KODU - Aşağısını değiştirmenize gerek yok
+   ========================================================== */
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fold = s => String(s || "").toLocaleLowerCase("tr").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ı/g, "i");
+const hue = s => [...s].reduce((h, c) => (h * 31 + c.charCodeAt(0)) % 360, 7);
+const state = { q: "", cat: "Tümü" };
+
+const iconEl = a => `<span class="ico" style="--h:${hue(a.name)}">${esc(a.name.slice(0, 2).toUpperCase())}${a.icon ? `<img src="${esc(a.icon)}" alt="" loading="lazy" onerror="this.remove()">` : ""}</span>`;
+const rateEl = a => `<span class="rate"><i class="fa-solid fa-star"></i>${Number(a.rating || 0).toFixed(1)}</span>`;
+const verEl = a => `<div class="vt"><span class="ver">${esc(a.version)}</span>${a.badge ? `<span class="bdg">${esc(a.badge)}</span>` : ""}</div>`;
+const dlEl = (a, cls) => a.download
+  ? `<a class="btn btn-neon ${cls}" href="${esc(a.download)}" download target="_blank" rel="noopener"><i class="fa-solid fa-download"></i>İndir</a>`
+  : `<button class="btn btn-ghost ${cls}" disabled>Yakında</button>`;
+
+/* Header, footer */
+$("#dcBtn").href = siteConfig.discord;
+$("#links").innerHTML = siteConfig.links.map(l => `<a href="${esc(l.url)}" target="_blank" rel="noopener"><i class="${esc(l.icon)}"></i>${esc(l.label)}</a>`).join("");
+
+/* Slider */
+let si = 0, timer, slideEls = [], dotEls = [];
+function buildHero() {
+  const hero = $("#hero");
+  if (!slidesData.length) { hero.remove(); return; }
+  const bgFx = "radial-gradient(circle at 82% 18%,rgba(124,58,237,.6),transparent 55%),radial-gradient(circle at 12% 95%,rgba(59,130,246,.45),transparent 50%),#16161a";
+  hero.innerHTML = slidesData.map(s => {
+    const app = s.appId && appsData.find(a => a.id === s.appId);
+    const btn = app ? `<button class="btn btn-neon" data-app="${esc(app.id)}"><i class="fa-solid fa-download"></i>${esc(s.button || "İncele")}</button>`
+      : `<a class="btn btn-neon" href="${esc(s.link || "#")}" target="_blank" rel="noopener"><i class="fa-brands fa-discord"></i>${esc(s.button || "Git")}</a>`;
+    const bg = s.image ? `url('${esc(s.image)}'),${bgFx}` : bgFx;
+    return `<div class="slide" style="background:${bg};background-size:cover;background-position:center"><div>
+      <span class="tag"><i class="fa-solid ${esc(s.icon || "fa-star")}"></i>${esc(s.tag)}</span>
+      <h2>${esc(s.title)}</h2><p>${esc(s.text)}</p>${btn}</div></div>`;
+  }).join("") + (slidesData.length > 1 ? `<div class="ctl"><button id="pv" aria-label="Önceki"><i class="fa-solid fa-chevron-left"></i></button>${slidesData.map((_, i) => `<button class="dot" data-i="${i}" aria-label="Slayt ${i + 1}"></button>`).join("")}<button id="nx" aria-label="Sonraki"><i class="fa-solid fa-chevron-right"></i></button></div>` : "");
+  slideEls = [...hero.querySelectorAll(".slide")];
+  dotEls = [...hero.querySelectorAll(".dot")];
+  show(0);
+  if (slideEls.length > 1) {
+    $("#pv").onclick = () => { show(si - 1); auto(); };
+    $("#nx").onclick = () => { show(si + 1); auto(); };
+    dotEls.forEach(d => d.onclick = () => { show(+d.dataset.i); auto(); });
+    let x0 = 0;
+    hero.addEventListener("touchstart", e => x0 = e.touches[0].clientX, { passive: true });
+    hero.addEventListener("touchend", e => { const d = e.changedTouches[0].clientX - x0; if (Math.abs(d) > 50) { show(si + (d < 0 ? 1 : -1)); auto(); } });
+    hero.addEventListener("mouseenter", () => clearInterval(timer));
+    hero.addEventListener("mouseleave", auto);
+    auto();
+  }
+}
+function show(i) {
+  si = (i + slideEls.length) % slideEls.length;
+  slideEls.forEach((e, k) => e.classList.toggle("on", k === si));
+  dotEls.forEach((e, k) => e.classList.toggle("on", k === si));
+}
+function auto() {
+  clearInterval(timer);
+  if (!matchMedia("(prefers-reduced-motion:reduce)").matches) timer = setInterval(() => show(si + 1), 6000);
+}
+
+/* Kategoriler, arama, kartlar */
+function buildChips() {
+  const cats = ["Tümü", ...[...new Set(appsData.map(a => a.category))]];
+  $("#chips").innerHTML = cats.map(c => `<button class="cf${c === state.cat ? " on" : ""}" role="tab" data-cat="${esc(c)}">${esc(c)}</button>`).join("");
+}
+function filtered() {
+  const q = fold(state.q.trim());
+  return appsData.filter(a => (state.cat === "Tümü" || a.category === state.cat) &&
+    (!q || fold([a.name, a.category, a.description, a.badge, ...(a.tags || [])].join(" ")).includes(q)));
+}
+function render() {
+  const list = filtered();
+  $("#count").textContent = list.length + " uygulama";
+  $("#grid").innerHTML = list.map((a, i) => `
+    <article class="card" tabindex="0" data-app="${esc(a.id)}" style="animation-delay:${Math.min(i, 8) * 45}ms">
+      <div class="top">${iconEl(a)}<div><h4>${esc(a.name)}</h4><div class="sub">${esc(a.category)}</div></div></div>
+      ${verEl(a)}
+      <p class="desc">${esc(a.description)}</p>
+      <div class="rs">${rateEl(a)}<span>${esc(a.size || "")}</span></div>
+      <div class="tags">${(a.tags || []).map(t => `<span>${esc(t)}</span>`).join("")}</div>
+      <div class="acts"><button class="btn btn-ghost sm">Detay</button>${dlEl(a, "sm")}</div>
+    </article>`).join("");
+  const none = !list.length;
+  $("#empty").classList.toggle("on", none);
+  $("#eq").textContent = state.q.trim() ? `"${state.q.trim()}" için sonuç yok. Farklı bir anahtar kelime deneyin.` : "Bu kategoride henüz uygulama yok.";
+  $("#clr").classList.toggle("on", !!state.q);
+}
+
+/* Detay penceresi */
+let lastFocus;
+function openModal(id) {
+  const a = appsData.find(x => x.id === id);
+  if (!a) return;
+  lastFocus = document.activeElement;
+  const date = a.updated ? new Date(a.updated).toLocaleDateString("tr-TR", { day: "numeric", month: "short", year: "numeric" }) : "-";
+  $("#modal").innerHTML = `<button class="x" data-close aria-label="Kapat"><i class="fa-solid fa-xmark"></i></button>
+    <div class="mh">${iconEl(a)}<div><h3>${esc(a.name)}</h3><div class="sub">${esc(a.category)}</div>${verEl(a)}</div></div>
+    <p class="det">${esc(a.details || a.description)}</p>
+    <div class="meta"><div><b>${Number(a.rating || 0).toFixed(1)} ★</b><span>Puan</span></div><div><b>${esc(a.size || "-")}</b><span>Boyut</span></div><div><b>${date}</b><span>Güncelleme</span></div></div>
+    <div class="tags">${(a.tags || []).map(t => `<span>${esc(t)}</span>`).join("")}</div>${dlEl(a, "big")}`;
+  $("#ov").classList.add("on");
+  document.body.style.overflow = "hidden";
+  $("#modal .x").focus();
+}
+function closeModal() {
+  $("#ov").classList.remove("on");
+  document.body.style.overflow = "";
+  if (lastFocus) lastFocus.focus();
+}
+
+/* Olaylar */
+$("#q").addEventListener("input", e => { state.q = e.target.value; render(); });
+$("#clr").onclick = () => { state.q = ""; $("#q").value = ""; render(); $("#q").focus(); };
+$("#reset").onclick = () => { state.q = ""; state.cat = "Tümü"; $("#q").value = ""; buildChips(); render(); };
+$("#chips").addEventListener("click", e => {
+  const b = e.target.closest("[data-cat]");
+  if (b) { state.cat = b.dataset.cat; buildChips(); render(); }
+});
+document.addEventListener("click", e => {
+  if (e.target.closest("a")) return;
+  if (e.target.closest("[data-close]") || e.target === $("#ov")) return closeModal();
+  const t = e.target.closest("[data-app]");
+  if (t) openModal(t.dataset.app);
+});
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") closeModal();
+  if (e.key === "Enter" && e.target.classList.contains("card")) openModal(e.target.dataset.app);
+});
+
+buildHero(); buildChips(); render();
+</script>
+</body>
+</html>
